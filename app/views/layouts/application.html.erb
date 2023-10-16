@@ -2,15 +2,15 @@
 <html>
   <head>
     <title>Pimentann</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= render 'layouts/default_head' %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
+  <%= render 'layouts/header' %>
+  <turbo-frame id="flash">
+    <%= render 'layouts/shared/flash' %>
+  </turbo-frame>
     <%= yield %>
   </body>
 </html>
