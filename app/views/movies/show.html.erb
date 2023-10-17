@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row justify-content-between">
+
+    <% @movies.each do |movie| %>
+
+    <div class="card col-lg-3">
+    <%= image_tag 'food_logo.jpg', alt: 'Food Logo', class: "card-img-top" %>
+      <div class="card-body">
+          <h5 class="card-title"><%= movie.name %></h5>
+            <li><%= form_tag(watched_user_movie_path(@user, movie), method: :post) do %>
+                 <%= submit_tag "add(watched_list)", class: "btn btn-primary" %>
+                <% end %>
+            </li>
+             <li><%= form_tag(watching_user_movie_path(@user, movie), method: :post) do %>
+                 <%= submit_tag "add(watching_list)", class: "btn btn-primary" %>
+                <% end %>
+            </li>
+             <li><%= form_tag(to_watch_user_movie_path(@user, movie), method: :post) do %>
+                 <%= submit_tag "add(to_watch_list)", class: "btn btn-primary" %>
+                <% end %>
+            </li>
+      </div>
+    </div>
+
+    <% end %>
+
+    <%= will_paginate @movies %>
+     
+
+    
+
+  </div>
+
+  
+
+</div>
+
+
+
+

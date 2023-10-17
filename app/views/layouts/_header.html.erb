@@ -5,8 +5,10 @@
       <li  ><%= link_to "Home", root_path, class: "nav-link" %></li>
       <% if logged_in? %>
         <li><%= link_to "Profile", current_user, class: "nav-link" %></li>
-        <li><%= link_to 'Log out', logout_path,
-        data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %></li> 
+        <li><%= form_tag(logout_path, method: :delete) do %>
+                 <%= submit_tag "Log Out", class: "btn btn-primary" %>
+                <% end %>
+        </li> 
       <% else %>
         <li  ><%= link_to "Log In", login_path, class: "nav-link" %></li>
       <% end %>

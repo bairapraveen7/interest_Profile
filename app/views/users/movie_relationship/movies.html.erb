@@ -1,0 +1,38 @@
+<%= link_to "Add Movies", movie_path, class: "btn btn-primary" %>
+
+<h1>Watched Movies</h1>
+<div class="user_movie_relationship_movies">
+    <% @watched_movies.each do |movie| %>
+        <div class="card">
+        <%= image_tag 'movie_logo.jpg', alt: 'Food Logo', class: "card-img-top" %>
+        <div class="card-body">
+            <h5 class="card-title"><%= movie.name %></h5>
+            <h7 class="card-title"><%= movie.director %></h7>
+        </div>
+        </div>
+    <% end %>
+</div>
+<h1>Watching Movies</h1>
+<div class="user_movie_relationship_movies">
+    <% @watching_movies.each do |movie| %>
+        <div class="card">
+        <%= image_tag 'movie_logo.jpg', alt: 'Food Logo', class: "card-img-top" %>
+        <div class="card-body">
+            <h5 class="card-title"><%= movie.name %></h5>
+            <h7 class="card-title"><%= movie.director %></h7>
+        </div>
+        </div>
+    <% end %>
+</div>
+<h1>Watched Movies</h1>
+<div class="user_movie_relationship_movies">
+    <% @to_watch_movies.each do |movie| %>
+        <div class="card">
+        <%= image_tag 'movie_logo.jpg', alt: 'Food Logo', class: "card-img-top" %>
+        <div class="card-body">
+            <h5 class="card-title"><%= movie.name %></h5>
+            <h7 class="card-title"><%= movie.director %></h7>
+        </div>
+        </div>
+    <% end %>
+</div>

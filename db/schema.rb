@@ -10,7 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_16_134154) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_17_111428) do
+  create_table "movie_relationship_user_movies", force: :cascade do |t|
+    t.integer "status"
+    t.text "notes"
+    t.integer "rating"
+    t.integer "user_id", null: false
+    t.integer "movie_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["movie_id"], name: "index_movie_relationship_user_movies_on_movie_id"
+    t.index ["user_id"], name: "index_movie_relationship_user_movies_on_user_id"
+  end
+
+  create_table "movies", force: :cascade do |t|
+    t.text "name"
+    t.text "director"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -18,4 +37,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_16_134154) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "movie_relationship_user_movies", "movies"
+  add_foreign_key "movie_relationship_user_movies", "users"
 end

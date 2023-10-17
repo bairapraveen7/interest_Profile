@@ -3,6 +3,7 @@ import "@hotwired/turbo-rails"
 import "controllers"
 
 //= require jquery
+//= require jquery-ui
 //= require rails-ujs
 //= require turbolinks
 //= require bootstrap-sprockets
