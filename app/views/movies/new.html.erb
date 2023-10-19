@@ -1,0 +1,12 @@
+ 
+         <%= form_with(model: @movie,local:true) do |f| %>
+
+            <%= f.label :name %>
+            <%= f.text_field :name, class: 'form-control' %>
+
+            <%= f.label :director %>
+            <%= f.text_field :director, class: 'form-control' %>
+
+            <%= f.submit "Save changes", class: "btn btn-primary" %>
+        <% end %>
+ 

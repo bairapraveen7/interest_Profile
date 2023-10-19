@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       redirect_to @user
     else 
       flash[:danger] = "Email doesn't exist"
-      render_flash
+      render 'new'
     end 
   end 
 

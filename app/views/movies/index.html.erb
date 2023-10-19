@@ -1,0 +1,73 @@
+
+<%= form_with(url: user_movies_path(@user), method: :get) do %>
+  <%= text_field_tag :search, params[:search], placeholder: "Search for movie" %>
+  <%= submit_tag "Search"  %>
+<% end %>
+
+<div id="ajax_andi"></div>
+
+<div class="container">
+  <div class="row justify-content-between">
+
+    <% if @movies.empty? %>
+
+      <%= form_with(url: addMovie_path, method: :get) do %>
+      <%= submit_tag "Add movie to Database"  %>
+    <% end %>
+      
+    <% else %>
+
+    <% @movies.each do |movie| %>
+
+    <div class="card col-lg-3">
+    <%= image_tag 'food_logo.jpg', alt: 'Food Logo', class: "card-img-top" %>
+      <div class="card-body">
+          <h5 class="card-title"><%= movie.name %></h5>
+            <li>
+              <% if @watched_movies.include?(movie) %>
+                <%= "Added to watched" %>
+              <% else %>
+                <%= form_tag(watched_user_movie_path(@user, movie), method: :post) do %>
+                  <%= submit_tag "Add to Watched List", class: "btn btn-primary" %>
+                <% end %>
+              <% end %>
+            </li>
+             <li>
+              <% if @watching_movies.include?(movie) %>
+                <%= "Added to watching" %>
+              <% else %>
+                <%= form_tag(watching_user_movie_path(@user, movie), method: :post) do %>
+                  <%= submit_tag "Add to Watching list", class: "btn btn-primary" %>
+                <% end %>
+              <% end %>
+            </li>
+             <li>
+             <% if @to_watch_movies.include?(movie) %>
+                <%= "Added to to_watch list" %>
+              <% else %>
+                <%= form_tag(to_watch_user_movie_path(@user, movie), method: :post) do %>
+                  <%= submit_tag "Add to to_watch List", class: "btn btn-primary" %>
+                <% end %>
+              <% end %>
+            </li>
+      </div>
+    </div>
+
+    <% end %>
+
+    <% end %>
+
+    <%= will_paginate @movies %>
+     
+
+    
+
+  </div>
+
+  
+
+</div>
+
+
+
+

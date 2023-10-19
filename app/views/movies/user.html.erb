@@ -1,0 +1,101 @@
+
+
+
+<%= link_to "Add Movies", user_movies_path(@user), class: "btn btn-primary" %>
+
+<h1>Watched Movies</h1>
+<div class="user_movie_relationship_movies">
+    <% @watched_movies.each do |movie| %>
+        <div class="card">
+        <%= image_tag 'movie_logo.jpg', alt: 'Food Logo', class: "card-img-top" %>
+        <div class="card-body">
+            <h5 class="card-title"><%= movie.name %></h5>
+            <h7 class="card-title"><%= movie.director %></h7>
+            <p>Rating: <span id="rating_<%= movie.id %>"><%= @user.movie_rating(movie)||"-" %></span>
+               <a href="#" class="modify-rating" data-movie-id="<%= movie.id %>">Modify</a>
+            </p>
+            <%= form_with(url: change_notes_user_movie_path(@user,movie),method: :patch, remote: true) do |f| %>
+               <%= f.text_field :rating, id: "rating_input_#{movie.id}", style: "display:none;" %>
+               <%= f.submit "Save", class:"btn btn-primary", id: "save_rating_#{movie.id}", style: "display:none;" %>
+            <% end %>
+            <p>Notes: <%= @user.movie_notes(movie)||"-" %></p>
+            <%= form_tag(watching_user_movie_path(@user, movie), method: :post) do %>
+              <%= submit_tag "Add to Watching List", class: "btn btn-primary" %>
+            <% end %>
+            <%= form_tag(to_watch_user_movie_path(@user, movie), method: :post) do %>
+              <%= submit_tag "Add to To_watch List", class: "btn btn-primary" %>
+            <% end %>
+        </div>
+        </div>
+    <% end %>
+</div>
+<h1>Watching Movies</h1>
+<div class="user_movie_relationship_movies">
+    <% @watching_movies.each do |movie| %>
+        <div class="card">
+        <%= image_tag 'movie_logo.jpg', alt: 'Food Logo', class: "card-img-top" %>
+        <div class="card-body">
+            <h5 class="card-title"><%= movie.name %></h5>
+            <h7 class="card-title"><%= movie.director %></h7>
+            <p>Notes: <%= @user.movie_notes(movie)||"-" %></p>
+             <%= form_tag(watched_user_movie_path(@user, movie), method: :post) do %>
+              <%= submit_tag "Add to Watched List", class: "btn btn-primary" %>
+            <% end %>
+            <%= form_tag(to_watch_user_movie_path(@user, movie), method: :post) do %>
+              <%= submit_tag "Add to To_watch List", class: "btn btn-primary" %>
+            <% end %>
+        </div>
+        </div>
+    <% end %>
+</div>
+<h1>To_watch Movies</h1>
+<div class="user_movie_relationship_movies">
+    <% @to_watch_movies.each do |movie| %>
+        <div class="card">
+        <%= image_tag 'movie_logo.jpg', alt: 'Food Logo', class: "card-img-top" %>
+        <div class="card-body">
+            <h5 class="card-title"><%= movie.name %></h5>
+            <h7 class="card-title"><%= movie.director %></h7>
+            <p>Notes: <%= @user.movie_notes(movie)||"-" %></p>
+             <%= form_tag(watched_user_movie_path(@user, movie), method: :post) do %>
+              <%= submit_tag "Add to Watched List", class: "btn btn-primary" %>
+            <% end %>
+            <%= form_tag(watching_user_movie_path(@user, movie), method: :post) do %>
+              <%= submit_tag "Add to Watching List", class: "btn btn-primary" %>
+            <% end %>
+        </div>
+        </div>
+    <% end %>
+</div>
+
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Home</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</button>
+  </li>
+</ul>
+<div class="tab-content" id="pills-tabContent">
+  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">don't you give orur </div>
+  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">dont' let me love orlsejr</div>
+  <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">tid id i isjtti i id i iti iti </div>
+</div>
+
+<script>
+  $(document).ready(function(){
+    $(".modify-rating").on("click",function(e)){
+      e.preventDefault();
+      console.log("hi bro");
+      var movieId = $(this).data("movie-id");
+      $("#rating_"+movieId).hide();
+      $("#rating_input_"+movieId).show();
+      $("#save_rating_"+movieId).show();
+    }
+  })
+</script>
+
+
