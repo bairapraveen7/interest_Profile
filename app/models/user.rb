@@ -5,11 +5,11 @@ class User < ApplicationRecord
 
     def movie_notes(m1)
         # User knows too much about connect_movies and it knows that connect_movies has a relationship called movies
-        connect_movies.find_by(movie: m1)&.notes
+        connect_movies.find_by(movie_id: m1.id).notes
     end 
 
     def movie_rating(m1)
-        connect_movies.find_by(movie: m1)&.rating
+        connect_movies.find_by(movie_id: m1.id).rating
     end 
 
 end
