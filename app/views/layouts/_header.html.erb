@@ -1,18 +1,16 @@
 <header>
-<nav class="navbar">
-  <div class="container-fluid">
-    <ul class="nav navbar-nav navbar-right">
-      <li  ><%= link_to "Home", root_path, class: "nav-link" %></li>
+<nav class="navbar navbar-expand-lg bg-light bg-gradient justify-space-between">
+    <ul class="navbar-nav navbar-expand-sm ms-auto">
+      <li  ><%= link_to "Home", root_path, class: "nav-link mx-4 link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" %></li>
       <% if logged_in? %>
-        <li><%= link_to "Profile", current_user, class: "nav-link" %></li>
+        <li><%= link_to "Profile", current_user, class: "nav-link mx-4 link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" %></li>
         <li><%= form_tag(logout_path, method: :delete) do %>
-                 <%= submit_tag "Log Out", class: "btn btn-primary" %>
+                 <%= submit_tag "Log Out", class: "nav-link btn-link  mx-4 mt-2 link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" %>
                 <% end %>
         </li> 
       <% else %>
-        <li  ><%= link_to "Log In", login_path, class: "nav-link" %></li>
+        <li><%= link_to "Log In", login_path, class: "nav-link mx-4 link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" %></li>
       <% end %>
     </ul>
-  </div>
 </nav>
 </header>

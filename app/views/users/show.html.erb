@@ -1,44 +1,59 @@
 <div class="user_show_profile">
-    <%= gravatar_for @user %>
-    <h1>Hey <%= @user.name %>, How's it going </h1>
+    <div class="text-center">
+      <h1>Hey <%= @user.name %>, How's it going </h1>
+    </div>
 </div>
-<div class="container">
-  <div class="row justify-content-between">
-    <div class="card col-lg-3">
-    <%= image_tag 'movie_logo.jpg', alt: 'Food Logo', class: "card-img-top" %>
-      <div class="card-body">
-          <h5 class="card-title">Movies</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <%= link_to "Explore", user_movie_path(@user), class: "btn btn-primary" %>
+<div class="container d-flex justify-content-center mt-5 pt-5">
+  <div class="row ">
+    <div class="col-lg col-sm-8 col-md-3 m-auto">
+      <div class="card border-0 shadow">
+      <%= image_tag 'movie_logo.jpg', alt: 'Food Logo', class: "card-img-top" %>
+        <div class="card-body">
+            <h5 class="card-title">Movies</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <%= link_to "Explore", user_movie_path(@user), class: "btn btn-primary" %>
+        </div>
       </div>
     </div>
 
-    <div class="card col-lg-3">
-    <%= image_tag 'music_logo.jpg', alt: 'Food Logo', class: "card-img-top" %>
-      <div class="card-body">
-          <h5 class="card-title">Music</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="btn btn-primary">Explore</a>
+    <div class="col-lg col-sm-8 col-md-3 m-auto">
+
+      <div class="card border-0 shadow">
+      <%= image_tag 'music_logo.jpg', alt: 'Food Logo', class: "card-img-top" %>
+        <div class="card-body">
+            <h5 class="card-title">Music</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Explore</a>
+        </div>
       </div>
+
     </div>
 
-    <div class="card col-lg-3">
-    <%= image_tag 'book_logo.jpg', alt: 'Food Logo', class: "card-img-top" %>
-      <div class="card-body">
-          <h5 class="card-title">Books</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="btn btn-primary">Explore</a>
+    <div class="col-lg col-sm-12 col-md-3 m-auto">
+
+      <div class="card border-0 shadow">
+      <%= image_tag 'book_logo.jpg', alt: 'Food Logo', class: "card-img-top" %>
+        <div class="card-body">
+            <h5 class="card-title">Books</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Explore</a>
+        </div>
       </div>
+
     </div>
 
-    <div class="card col-lg-3">
-    <%= image_tag 'food_logo.jpg', alt: 'Food Logo', class: "card-img-top" %>
-      <div class="card-body">
-          <h5 class="card-title">Foods</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="btn btn-primary">Explore</a>
+    <div class="col-lg col-sm-8 col-md-3 m-auto">
+      <div class="card border-0 shadow">
+      <%= image_tag 'food_logo.jpg', alt: 'Food Logo', class: "card-img-top" %>
+        <div class="card-body">
+            <h5 class="card-title">Foods</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Explore</a>
+        </div>
       </div>
+
     </div>
+
 
   </div>
 </div>

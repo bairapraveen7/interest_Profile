@@ -1,17 +1,33 @@
 
-<%= form_with(url: user_movies_path(@user), method: :get) do %>
-  <%= text_field_tag :search, params[:search], placeholder: "Search for movie" %>
-  <%= submit_tag "Search"  %>
-<% end %>
+<div class="container mt-5 pt-5">
+  <div class="row">
+    <div class="col-12 col-sm-8 col-md-6 m-auto">
+    <%= form_with(url: all_movies_path(@user), method: :get) do %>
+        <%= text_field_tag :search, params[:search], placeholder: "Search for movie", class: "form-control"  %>
+        <%= submit_tag "Search", class: "btn btn-primary mt-4" %>
+    <% end %>
+    </div>
+  </div>
+</div>
 
-<div class="container">
-  <div class="row justify-content-between">
+<div class="container d-flex justify-content-center mt-5 pt-5">
+  <div class="row">
 
     <% if @movies.empty? %>
 
-      <%= form_with(url: addMovie_path, method: :get) do %>
-      <%= submit_tag "Add movie to Database"  %>
-    <% end %>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-sm-8 col-md-6 m-auto">
+        <%= form_with(url: addMovie_path, method: :get) do %>
+        <%= image_tag 'no-data1.avif', class: "no-data-image" %>
+        <div class="text-center">
+          <%= submit_tag "Add movie to Database", class: "btn btn-warning mx-4 my-4" %>
+        </div>
+      <% end %>
+        </div>
+    </div>
+
+    </div>
       
     <% else %>
 
@@ -23,7 +39,11 @@
 
     <% end %>
 
-    <%= will_paginate @movies %>
+    <div class="text-center mt-5 pt-5">
+
+      <%= will_paginate @movies %>
+
+    </div>
      
 
     

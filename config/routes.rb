@@ -6,13 +6,13 @@ Rails.application.routes.draw do
   get '/addMovie', to: 'movies#new'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
-  get '/search', to: 'movies#search'
+  get '/movies/:user_id', to: 'movies#index', as: 'all_movies'
   resources :users
   resources :movies
 
   resources :movies do 
       member do 
-        get :user 
+        get :user
       end 
   end 
 

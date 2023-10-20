@@ -3,7 +3,7 @@ class MoviesController < ApplicationController
     @movie = Movie.new
   end
 
-  def index 
+  def index
     if params[:search].present?
       @movies = Movie.search(search_arg: params[:search],:page_arg => params[:page], page_count: 4)
     else 
@@ -45,7 +45,9 @@ class MoviesController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to user_movie_path(@user) }
-      format.js
+      format.js { 
+        redirect_to root_url
+      }
     end 
     
 
