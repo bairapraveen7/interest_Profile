@@ -1,0 +1,43 @@
+ 
+  <% @watching_movies.each do |movie| %>
+    <div class="col-lg col-sm-8 col-md-3 m-auto">
+      <div class="card border-0 shadow">
+        <%= link_to movie_path(movie) do %>
+        <%= image_tag 'movie_logo.jpg' , alt: 'Food Logo' , class: "card-img-top" %>
+        <% end %>
+          <div class="card-body">
+            <h5 class="card-title">
+              <%= movie.name %>
+            </h5>
+            <h7 class="card-title">
+              <%= movie.director %>
+            </h7>
+            <p>Notes: <%= @user.movie_notes(movie)||"-" %>
+            </p>
+
+
+
+
+            <div class="dropdown">
+              <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+                Add
+              </button>
+              <ul class="dropdown-menu">
+                <li><a>
+                    <%= form_with(url: watched_user_movie_path(@user, movie), method: :post, local: false ) do %>
+                      <%= submit_tag "Watched List" , class: "btn-link btn-primary" %>
+                        <% end %>
+                  </a></li>
+                <li><a>
+                    <%= form_with(url: to_watch_user_movie_path(@user, movie), method: :post, local: false) do %>
+                      <%= submit_tag "To_watch List" , class: "btn-link btn-primary" %>
+                        <% end %>
+                  </a></li>
+              </ul>
+            </div>
+
+          </div>
+      </div>
+    </div>
+    <% end %>
+ 

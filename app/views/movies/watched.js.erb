@@ -1,0 +1,4 @@
+$(".movies_watched").html("<%= escape_javascript(render 'watched' ) %>");
+$(".movies_watching").html("<%= escape_javascript(render 'watching') %>");
+$(".movies_to_watch").html("<%= escape_javascript(render 'to_watch') %>");
+$(".movie_actions_<%= @movie.id %>").html("<%= escape_javascript(render 'actions', movie: @movie,id: 2) %>")

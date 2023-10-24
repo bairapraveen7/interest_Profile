@@ -6,5 +6,6 @@
 //= link_directory ../stylesheets
 //= link jquery3.js
 //= link bootstrap.min.js
+//= link rails-ujs.js
 
  
