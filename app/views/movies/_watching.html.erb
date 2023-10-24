@@ -3,7 +3,7 @@
     <div class="col-lg col-sm-8 col-md-3 m-auto">
       <div class="card border-0 shadow">
         <%= link_to movie_path(movie) do %>
-        <%= image_tag 'movie_logo.jpg' , alt: 'Food Logo' , class: "card-img-top" %>
+        <%= image_tag(movie.image || "movie_logo.jpg" , alt: 'Food Logo' , class: "card-img-top") %>
         <% end %>
           <div class="card-body">
             <h5 class="card-title">
@@ -12,8 +12,7 @@
             <h7 class="card-title">
               <%= movie.director %>
             </h7>
-            <p>Notes: <%= @user.movie_notes(movie)||"-" %>
-            </p>
+           
 
 
 

@@ -92,7 +92,7 @@ class MoviesController < ApplicationController
   private 
 
   def movie_create_params
-    params.require(:movie).permit(:name,:director)
+    params.require(:movie).permit(:name,:director,:image)
   end 
 
   def movie_update_params

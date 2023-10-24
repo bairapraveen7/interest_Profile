@@ -3,7 +3,7 @@
         <div class="col-lg col-sm-8 col-md-3 m-auto">
             <div class="card border-0 shadow">
                 <%= link_to movie_path(movie, watched: true) do %>
-                <%= image_tag 'movie_logo.jpg' , alt: 'Food Logo' , class: "card-img-top" %>
+                <%= image_tag(movie.image || "movie_logo.jpg" , alt: 'Food Logo' , class: "card-img-top") %>
                 <% end %>
                     <div class="card-body">
                         <h5 class="card-title">
@@ -12,11 +12,6 @@
                         <h7 class="card-title">
                             <%= movie.director %>
                         </h7>
-                        <p>Rating: <span id="rating_<%= movie.id %>">
-                                <%= @user.movie_rating(movie)||"-" %>
-                            </span>
-                            <a href="#" class="modify-rating" data-movie-id="<%= movie.id %>">Modify</a>
-                        </p>
                         <%= form_with(url: change_notes_user_movie_path(@user,movie),method: :patch, local: false ) do |f| %>
                             <%= f.text_field :rating, id: "rating_input_#{movie.id}" , style: "display:none;" %>
                                 <%= f.submit "Save" , class:"btn btn-primary", id: "save_rating_#{movie.id}" ,

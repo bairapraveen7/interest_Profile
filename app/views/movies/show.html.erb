@@ -24,7 +24,7 @@
 
                 <h3>Rating: <%= current_user.movie_rating(@movie) %></h3>
 
-                <h3>Rating: <%= current_user.movie_notes(@movie) %></h3>
+                <h3>Review: <%= current_user.movie_notes(@movie) %></h3>
 
                 <%= form_with(url: user_movie_path(current_user,@movie), method: "patch",local: false) do %>
                                                             <%= submit_tag "Modify" ,

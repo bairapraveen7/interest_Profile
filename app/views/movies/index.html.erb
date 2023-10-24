@@ -36,7 +36,7 @@
 
 <div class="col-lg col-sm-8 col-md-3 m-auto %>">
   <div class="card border-0 shadow ">
-    <%= image_tag 'food_logo.jpg' , alt: 'Food Logo' , class: "card-img-top" %>
+    <%= image_tag(movie.image || "movie_logo.jpg" , alt: 'Food Logo' , class: "card-img-top")%>
       <div class="card-body">
         <h5 class="card-title">
           <%= movie.name %>
