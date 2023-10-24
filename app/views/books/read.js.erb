@@ -1,0 +1,4 @@
+$(".books_read").html("<%= escape_javascript(render 'read' ) %>");
+$(".books_reading").html("<%= escape_javascript(render 'reading') %>");
+$(".books_to_read").html("<%= escape_javascript(render 'to_read') %>");
+$(".book_actions_<%= @book.id %>").html("<%= escape_javascript(render 'actions', book: @book) %>")
