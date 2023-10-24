@@ -21,13 +21,13 @@
       <h1>Watched Movies</h1>
 <div class="user_movie_relationship_movies" style="overflow-y: scroll;height: 450px;">
   <div class="row movies_watched">
-       <%= render 'watched', id: 2 %>
+       <%= render 'watched' %>
     </div>
 </div>
 </div>
     <div id="menu1" class="tab-pane fade">
       <h1>Watching Movies</h1>
-<div class="user_movie_relationship_movies">
+<div class="user_movie_relationship_movies" style="overflow-y: scroll;height: 450px;">
   <div class="row movies_to_watch">
        <%= render 'watching' %>
   </div>
@@ -35,7 +35,7 @@
 </div>
     <div id="menu2" class="tab-pane fade">
       <h1>To_watch Movies</h1>
-<div class="user_movie_relationship_movies">
+<div class="user_movie_relationship_movies" style="overflow-y: scroll;height: 450px;">
   <div class="row movies_watching">
        <%= render 'to_watch' %>
   </div>

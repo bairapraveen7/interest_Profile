@@ -36,6 +36,18 @@ class MoviesController < ApplicationController
 
   end 
 
+  def destroy
+    current_user.connect_movies.find_by(movie_id: params[:id]).destroy
+    @movie = Movie.find(params[:id])
+    initialize_user_movies
+    respond_to do |format|
+      format.html { redirect_to user_movies_path(current_user) }
+      format.js   {
+        render 'movies/watched'
+      }
+    end 
+  end 
+
   def watched
     current_user.connect_movies.get_or_create(id: params[:id]).mark_as_watched! 
     initialize_user_movies
