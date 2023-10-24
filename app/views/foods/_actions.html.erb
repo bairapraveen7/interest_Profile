@@ -1,0 +1,21 @@
+
+  <li><a>
+      <% if @ate_foods.include?(food) %>
+        <%= "Added to ate" %>
+          <% else %>
+            <%= form_with(url: ate_user_food_path(@user, food), method: :post, local: false ) do |f| %>
+              <%= f.hidden_field :id %>
+                <%= submit_tag "Ate list" , class: "btn-link btn-primary" %>
+                  <% end %>
+                    <% end %>
+    </a></li>
+
+  <li><a>
+      <% if @to_eat_foods.include?(food) %>
+        <%= "Added to to_eat list" %>
+          <% else %>
+            <%= form_with(url: to_eat_user_food_path(@user, food), method: :post, local: false) do %>
+              <%= submit_tag "To_eat List" , class: "btn-link btn-primary" %>
+                <% end %>
+                  <% end %>
+    </a></li>

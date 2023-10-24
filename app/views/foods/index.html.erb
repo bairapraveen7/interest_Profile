@@ -1,0 +1,86 @@
+
+<div class="container mt-5 pt-5">
+  <div class="row">
+    <div class="col-12 col-sm-8 col-md-6 m-auto">
+    <%= form_with(url: foods_path, method: :get) do %>
+        <%= text_field_tag :search, params[:search], placeholder: "Search for food", class: "form-control"  %>
+        <%= submit_tag "Search", class: "btn btn-primary mt-4" %>
+    <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="container d-flex justify-content-center mt-5 pt-5">
+  <div class="row">
+
+    <% if @foods.empty? %>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-sm-8 col-md-6 m-auto">
+        <%= form_with(url: addMovie_path, method: :get) do %>
+        <%= image_tag 'no-data1.avif', class: "no-data-image" %>
+        <div class="text-center">
+          <%= submit_tag "Add movie to Database", class: "btn btn-warning mx-4 my-4" %>
+        </div>
+      <% end %>
+        </div>
+    </div>
+
+    </div>
+      
+    <% else %>
+
+    <% @foods.each do |food| %>
+
+
+<div class="col-lg col-sm-8 col-md-3 m-auto %>">
+  <div class="card border-0 shadow ">
+    <%= image_tag(food.image || "food_logo.jpg" , alt: 'Food Logo' , class: "card-img-top")%>
+      <div class="card-body">
+        <h5 class="card-title">
+          <%= food.name %>
+        </h5>
+
+        <div class="dropdown">
+          <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+            Add
+          </button>
+
+          <ul class="dropdown-menu food_actions_<%= food.id %>">
+
+          <%= render 'actions', food: food %>
+
+        </ul>
+         
+        </div>
+
+
+      </div>
+  </div>
+</div>
+
+       
+
+    <% end %>
+
+    <% end %>
+
+    <div class="text-center mt-5 pt-5">
+
+      <%= will_paginate @movies %>
+
+    </div>
+     
+
+    
+
+  </div>
+
+  
+
+</div>
+
+
+
+

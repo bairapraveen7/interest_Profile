@@ -10,13 +10,52 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_19_044516) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_24_171230) do
+  create_table "books", force: :cascade do |t|
+    t.string "name"
+    t.string "author"
+    t.string "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "foods", force: :cascade do |t|
+    t.string "name"
+    t.string "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "movies", force: :cascade do |t|
     t.text "name"
     t.text "director"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image"
+  end
+
+  create_table "user_books", force: :cascade do |t|
+    t.integer "status"
+    t.string "review"
+    t.integer "rating"
+    t.integer "user_id", null: false
+    t.integer "book_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_user_books_on_book_id"
+    t.index ["user_id"], name: "index_user_books_on_user_id"
+  end
+
+  create_table "user_foods", force: :cascade do |t|
+    t.integer "status"
+    t.integer "rating"
+    t.text "review"
+    t.integer "user_id", null: false
+    t.integer "food_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["food_id"], name: "index_user_foods_on_food_id"
+    t.index ["user_id"], name: "index_user_foods_on_user_id"
   end
 
   create_table "user_movies", force: :cascade do |t|
@@ -38,6 +77,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_19_044516) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "user_books", "books"
+  add_foreign_key "user_books", "users"
+  add_foreign_key "user_foods", "foods"
+  add_foreign_key "user_foods", "users"
   add_foreign_key "user_movies", "movies"
   add_foreign_key "user_movies", "users"
 end

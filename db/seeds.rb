@@ -32,3 +32,31 @@ movies = [
 movies.each  { |movie|
     Movie.create(name: movie, director: ('a'..'z').to_a.shuffle[0..5].join(""))
 }
+
+foods = [
+  "Hamburger",
+  "Sushi",
+  "Spaghetti",
+  "Fried Chicken",
+  "Tacos",
+  "Lasagna",
+  "Pancakes",
+  "Sushi",
+  "Burrito",
+  "Pizza",
+  "Omelette",
+  "Barbecue Ribs",
+  "Beef Stir-Fry",
+  "Clam Chowder",
+  "Chicken Alfredo",
+  "Lobster Bisque",
+  "Beef Stroganoff",
+  "Pad Thai",
+  "Biryani",
+  "Enchiladas"
+];
+
+foods.each  { |food|
+    Food.create(name: food)
+}
+
