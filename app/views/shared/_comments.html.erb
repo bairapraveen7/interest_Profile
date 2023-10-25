@@ -1,0 +1,13 @@
+<% @movie.comments.each do |comment| %>
+<% user = User.find(comment.user_id) %>
+<li id="comment-"<%= comment.id %>">
+    <%= link_to gravatar_for(user, size:50), user %>
+    <span class="users"><%= link_to user.name, users_path(user.id) %></span>
+    <span class="content">
+    <%= comment.content %>
+    </span>
+    <span class="timestamp">
+        Posted <%= time_ago_in_words(comment.created_at) %> ago.
+     </span>
+ </li>
+ <% end %>

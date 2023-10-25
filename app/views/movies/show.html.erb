@@ -50,5 +50,16 @@
                 release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing
                 software like Aldus PageMaker including versions of Lorem Ipsum.</p>
         </div>
+
+        <div class="col-12">
+            <%= render 'shared/new_comment', movie: @movie %>
+        </div>
+
+        <div class="col-12 user_movie_comments">
+            <h3>Comments</h3>
+            
+                <%= render 'shared/comments' %>
+           
+        </div>
     </div>
 </div>
