@@ -1,0 +1,2 @@
+$(".songs_liked").html("<%= escape_javascript(render 'liked' ) %>");
+$(".song_actions_<%= @song.id %>").html("<%= escape_javascript(render 'actions', song: @song) %>")

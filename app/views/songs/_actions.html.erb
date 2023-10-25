@@ -1,0 +1,13 @@
+
+  <li><a>
+      <% if @liked_songs.include?(song) %>
+        <%= "Added to liked" %>
+          <% else %>
+            <%= form_with(url: liked_user_song_path(@user, song), method: :post, local: false ) do |f| %>
+              <%= f.hidden_field :id %>
+                <%= submit_tag "Liked List" , class: "btn-link btn-primary" %>
+                  <% end %>
+                    <% end %>
+    </a></li>
+
+   

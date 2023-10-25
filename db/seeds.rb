@@ -32,3 +32,31 @@ movies = [
 movies.each  { |movie|
     Movie.create(name: movie, director: ('a'..'z').to_a.shuffle[0..5].join(""))
 }
+
+songs = [
+  "Bohemian Rhapsody - Queen",
+  "Imagine - John Lennon",
+  "Hotel California - Eagles",
+  "Stairway to Heaven - Led Zeppelin",
+  "Like a Rolling Stone - Bob Dylan",
+  "Billie Jean - Michael Jackson",
+  "Yesterday - The Beatles",
+  "Smells Like Teen Spirit - Nirvana",
+  "Johnny B. Goode - Chuck Berry",
+  "Purple Haze - Jimi Hendrix",
+  "I Want to Hold Your Hand - The Beatles",
+  "Boogie Wonderland - Earth, Wind & Fire",
+  "Sweet Child o' Mine - Guns N' Roses",
+  "Thriller - Michael Jackson",
+  "Let It Be - The Beatles",
+  "With or Without You - U2",
+  "Don't Stop Believin' - Journey",
+  "Rolling in the Deep - Adele",
+  "Wonderwall - Oasis",
+  "Hey Jude - The Beatles"
+];
+
+songs.each { |song| 
+    Song.create(name: song)
+}
+

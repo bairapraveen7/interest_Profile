@@ -4,10 +4,11 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new'
   get '/signup', to: 'users#new'
   get '/addMovie', to: 'movies#new'
+  get '/addSong', to: 'songs#new'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
    
-  resources :users ,:movies
+  resources :users ,:movies,:songs
 
     
 
@@ -15,6 +16,14 @@ Rails.application.routes.draw do
     resources :movies do
       member do 
         post :watched,:watching,:to_watch,:change_rating,:change_notes
+      end 
+    end 
+  end 
+  
+  resources :users do 
+    resources :songs do 
+      member do 
+        post :liked
       end 
     end 
   end 
