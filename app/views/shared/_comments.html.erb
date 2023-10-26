@@ -1,17 +1,5 @@
 <% @movie.comments.each do |comment| %>
 <% user = User.find(comment.user_id) %>
-<li id="comment-"<%= comment.id %>">
-    <div class="col-12">
-    <%= link_to gravatar_for(user, size:50), user %>
-    <span class="users"><%= link_to user.name, users_path(user.id) %></span>
-    <span class="content">
-    <%= comment.content %>
-    </span>
-   </div>
-    <div class="col-12">
-    <span class="timestamp">
-         <%= time_ago_in_words(comment.created_at) %> ago.
-     </span>
-    </div>
- </li>
+<% movie = Movie.find(comment.commentable_id) %>
+    <%= render 'shared/each_comment', comment: comment, user: user, movie: movie,rating: user.movie_rating(movie) %>
  <% end %>

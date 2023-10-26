@@ -2,5 +2,16 @@
     <h1>Hey, Welcome to the Pimentann </h1>
     <h2> New User?  <%= link_to "Sign up", signup_path %> </h2>
     <h3> Let's explore together </h3>
+
+    <select class="js-example-basic-multiple" name="states[]" multiple="multiple">
+        <option value="AL">Alabama</option>
+        <option value="WY">Wyoming</option>
+      </select>
     
 </div>
+
+<script>
+    $(document).ready(function() {
+    $('.js-example-basic-multiple').select2();
+});
+</script>
