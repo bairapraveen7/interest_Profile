@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_25_090718) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_26_055705) do
   create_table "books", force: :cascade do |t|
     t.string "name"
     t.string "author"
@@ -105,6 +105,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_25_090718) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "password_digest"
+    t.string "remember_digest"
   end
 
   add_foreign_key "comments", "users"
