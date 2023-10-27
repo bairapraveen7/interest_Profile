@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< Updated upstream
 ActiveRecord::Schema[7.0].define(version: 2023_10_26_055705) do
+=======
+ActiveRecord::Schema[7.0].define(version: 2023_10_27_171911) do
+>>>>>>> Stashed changes
   create_table "books", force: :cascade do |t|
     t.string "name"
     t.string "author"
@@ -50,6 +54,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_26_055705) do
     t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "timelines", force: :cascade do |t|
+    t.text "attributeValue"
+    t.integer "attributeType"
+    t.integer "user_id", null: false
+    t.string "timelineType_type", null: false
+    t.integer "timelineType_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["timelineType_type", "timelineType_id"], name: "index_timelines_on_timelineType"
+    t.index ["user_id"], name: "index_timelines_on_user_id"
   end
 
   create_table "user_books", force: :cascade do |t|
@@ -110,6 +126,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_26_055705) do
   end
 
   add_foreign_key "comments", "users"
+  add_foreign_key "timelines", "users"
   add_foreign_key "user_books", "books"
   add_foreign_key "user_books", "users"
   add_foreign_key "user_foods", "foods"

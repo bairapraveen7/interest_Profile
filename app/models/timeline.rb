@@ -1,0 +1,20 @@
+class Timeline < ApplicationRecord
+  belongs_to :user
+  belongs_to :timelineType, polymorphic: true
+
+  CHANGED_MOVIE_STATUS = 0
+  CHANGED_MOVIE_REVIEW = 1
+  CHANGED_MOVIE_RATING = 2
+  CHANGED_SONG_STATUS = 3
+  CHANGED_SONG_REVIEW = 4
+  CHANGED_SONG_RATING = 5
+  CHANGED_BOOK_STATUS = 6
+  CHANGED_BOOK_REVIEW = 7
+  CHANGED_BOOK_RATING = 8 
+  CHANGED_FOOD_STATUS = 9
+  CHANGED_FOOD_REVIEW = 10
+  CHANGED_FOOD_RATING = 11
+
+
+
+end
