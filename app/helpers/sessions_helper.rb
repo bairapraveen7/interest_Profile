@@ -11,6 +11,10 @@ module SessionsHelper
           end 
 
         end 
+    end
+    
+    def current_user?(user)
+        user && user == current_user
     end 
 
     def forget(user)
