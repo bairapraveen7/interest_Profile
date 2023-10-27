@@ -4,6 +4,8 @@ class User < ApplicationRecord
 
     has_many :comments, dependent: :destroy
 
+    has_many :timelines, dependent: :destroy
+
     attr_accessor :remember_token
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
     validates :name, presence: true

@@ -54,6 +54,7 @@ class MoviesController < ApplicationController
     current_user.connect_movies.get_or_create(id: params[:id]).mark_as_watched! 
     initialize_user_movies
     @movie = Movie.find(params[:id])
+    current_user.timelines.movie_status(timelineType: @movie,attributeValue: "watched")
     flash.now[:success] = "Movie added to watched list successfully"
     respond_to do |format|
       format.html { redirect_to user_movies_path(current_user) }
@@ -68,6 +69,7 @@ class MoviesController < ApplicationController
     current_user.connect_movies.get_or_create(id: params[:id]).mark_as_watching!
     initialize_user_movies
     @movie = Movie.find(params[:id])
+    current_user.timelines.movie_status(timelineType: @movie,attributeValue: "watching")
     flash.now[:success] = "Movie added to watching list successfully"
     respond_to do |format|
       format.html { redirect_to user_movies_path(current_user) }
@@ -82,6 +84,7 @@ class MoviesController < ApplicationController
     current_user.connect_movies.get_or_create(id: params[:id]).mark_as_to_watch!
     initialize_user_movies
     @movie = Movie.find(params[:id])
+    current_user.timelines.movie_status(timelineType: @movie,attributeValue: "to_watch")
     flash[:success] = "Movie added to to_watch list successfully"
     respond_to do |format|
       format.html { redirect_to user_movies_path(current_user) }
