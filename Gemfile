@@ -52,7 +52,7 @@ gem "bootsnap", require: false
 
   gem 'jquery-rails'
 
-  gem 'bcrypt', '3.1.13'
+  gem 'bcrypt', '3.1.7'
 
   gem 'jsbundling-rails'
 
