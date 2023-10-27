@@ -11,8 +11,11 @@
                 <%= @movie.director %>
             </h3>
 
+            <% user = User.find(params[:user]) %>
+
             <% if params[:watched] %>
 
+ 
             <div class="card border-0 shadow" style="width: 100%; background-color: lavender;">
 
 
@@ -22,14 +25,18 @@
 
                     
 
-                <h3>Rating: <%= current_user.movie_rating(@movie) %></h3>
+                <h3>Rating: <%= user.movie_rating(@movie) %></h3>
 
-                <h3>Review: <%= current_user.movie_notes(@movie) %></h3>
+                <h3>Review: <%= user.movie_notes(@movie) %></h3>
 
-                <%= form_with(url: user_movie_path(current_user,@movie), method: "patch",local: false) do %>
+                <% if current_user?(user) %>
+
+                <%= form_with(url: user_movie_path(user,@movie), method: "patch",local: false) do %>
                                                             <%= submit_tag "Modify" ,
                                                                 class: "btn btn-primary" %>
                                                                 <% end %>
+
+                <% end %>
 
                 </div>
 
@@ -51,9 +58,11 @@
                 software like Aldus PageMaker including versions of Lorem Ipsum.</p>
         </div>
 
+        <% if current_user?(user) %>
         <div class="col-12">
             <%= render 'shared/new_comment', movie: @movie %>
         </div>
+        <% end %>
 
         <div class="col-12 user_movie_comments">
             <h3>Comments</h3>

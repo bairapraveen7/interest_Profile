@@ -17,7 +17,9 @@
             <%= comment.content %>
             </span>
     </div>
+    <% if current_user?(user) %>
     <div class="col-12">
         <%= link_to "edit", edit_user_movie_comment_path(user,movie,comment), remote: true %>
     </div>
+    <% end %>
 </div>
