@@ -24,6 +24,7 @@ class MoviesController < ApplicationController
 
   def show 
     @movie = Movie.find(params[:id])
+    @user = User.find(params[:user_id])
   end 
 
   def change_rating

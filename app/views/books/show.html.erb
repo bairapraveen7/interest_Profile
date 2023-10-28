@@ -22,9 +22,9 @@
 
                     
 
-                <h3>Rating: <%= current_user.book_rating(@book) %></h3>
+                <h3>Rating: <%= @user.book_rating(@book) %></h3>
 
-                <h3>Review: <%= current_user.book_review(@book) %></h3>
+                <h3>Review: <%= @user.book_review(@book) %></h3>
 
                 <%= form_with(url: user_book_path(current_user,@book), method: "patch",local: false) do %>
                                                             <%= submit_tag "Modify" ,

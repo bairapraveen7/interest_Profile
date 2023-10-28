@@ -2,7 +2,7 @@
   <% @reading_books.each do |book| %>
     <div class="col-lg col-sm-8 col-md-3 m-auto">
       <div class="card border-0 shadow">
-        <%= link_to book_path(book) do %>
+        <%= link_to user_book_path(@user,book) do %>
         <%= image_tag(book.image || "movie_logo.jpg" , alt: 'Food Logo' , class: "card-img-top") %>
         <% end %>
           <div class="card-body">

@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
    
-  resources :users ,:movies, :books
+  resources :users ,:movies, :books, :foods,:songs
 
     
 
@@ -22,6 +22,10 @@ Rails.application.routes.draw do
       member do 
         post :watched,:watching,:to_watch
       end 
+
+      resources :comments do 
+      end 
+      
     end 
   end 
 
@@ -29,8 +33,11 @@ Rails.application.routes.draw do
     resources :books do
       member do 
         post :read,:reading,:to_read
-        post :watched,:watching,:to_watch
       end 
+
+      resources :comments do 
+      end 
+
     end 
   end 
 
@@ -63,6 +70,10 @@ Rails.application.routes.draw do
       member do 
         post :liked
       end 
+
+      resources :comments do 
+      end 
+
     end 
   end 
 
