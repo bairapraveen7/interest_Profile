@@ -1,0 +1,31 @@
+
+  <li><a>
+      <% if @read_books.include?(book) %>
+        <%= "Added to read list" %>
+          <% else %>
+            <%= form_with(url: read_user_book_path(@user, book), method: :post, local: false ) do |f| %>
+              <%= f.hidden_field :id %>
+                <%= submit_tag "Add to Read List" , class: "btn-link btn-primary" %>
+                  <% end %>
+                    <% end %>
+    </a></li>
+
+  <li><a>
+      <% if @reading_books.include?(book) %>
+        <%= "Added to reading list" %>
+          <% else %>
+            <%= form_with(url: reading_user_book_path(@user, book), method: :post, local: false) do %>
+              <%= submit_tag "Add to Reading list" , class: "btn-link btn-primary" %>
+                <% end %>
+                  <% end %>
+    </a></li>
+
+  <li><a>
+      <% if @to_read_books.include?(book) %>
+        <%= "Added to to_read list" %>
+          <% else %>
+            <%= form_with(url: to_read_user_book_path(@user, book), method: :post, local: false) do %>
+              <%= submit_tag "Add to To_Read List" , class: "btn-link btn-primary" %>
+                <% end %>
+                  <% end %>
+    </a></li>

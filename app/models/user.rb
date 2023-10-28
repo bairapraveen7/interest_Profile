@@ -29,6 +29,8 @@ class User < ApplicationRecord
         update_attribute(:remember_digest,nil)
     end 
     has_many :movies, through: :connect_movies , source: :movie
+    has_many :connect_books, class_name: 'UserBook'
+    has_many :books, through: :connect_books , source: :book
 
  
     has_many :connect_songs, class_name: 'UserSong'
@@ -48,6 +50,15 @@ class User < ApplicationRecord
     def movie_rating(m1)
         connect_movies.find_by(movie_id: m1.id).rating
     end 
+
+    def book_review(b1)
+        # User knows too much about connect_movies and it knows that connect_movies has a relationship called movies
+        connect_books.find_by(book_id: b1.id).review
+    end 
+
+    def book_rating(b1)
+        connect_books.find_by(book_id: b1.id).rating
+    end
 
  
     def song_review(s1)

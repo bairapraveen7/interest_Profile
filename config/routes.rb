@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'books/new'
   get 'comments/new'
   get 'comments/create'
   get 'movies/new'
@@ -6,18 +7,28 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new'
   get '/signup', to: 'users#new'
   get '/addMovie', to: 'movies#new'
+  get '/addBook', to: 'books#new'
   get '/addSong', to: 'songs#new'
   get '/addSong', to: 'songs#new'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
    
-  resources :users ,:movies,:songs, :foods
+  resources :users ,:movies, :books
 
     
 
   resources :users do
     resources :movies do
       member do 
+        post :watched,:watching,:to_watch
+      end 
+    end 
+  end 
+
+  resources :users do
+    resources :books do
+      member do 
+        post :read,:reading,:to_read
         post :watched,:watching,:to_watch
       end 
     end 

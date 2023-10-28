@@ -45,6 +45,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_27_171911) do
     t.string "image"
   end
 
+  create_table "user_books", force: :cascade do |t|
+    t.integer "status"
+    t.string "review"
+    t.integer "rating"
+    t.integer "user_id", null: false
+    t.integer "book_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_user_books_on_book_id"
+    t.index ["user_id"], name: "index_user_books_on_user_id"
+  end
+
   create_table "relationships", force: :cascade do |t|
     t.integer "follower_id"
     t.integer "followed_id"
@@ -129,6 +141,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_27_171911) do
     t.string "remember_digest"
   end
 
+  add_foreign_key "user_books", "books"
+  add_foreign_key "user_books", "users"
   add_foreign_key "comments", "users"
   add_foreign_key "timelines", "users"
   add_foreign_key "user_books", "books"
