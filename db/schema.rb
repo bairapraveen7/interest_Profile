@@ -10,13 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_24_180113) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_27_171911) do
   create_table "books", force: :cascade do |t|
     t.string "name"
     t.string "author"
     t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text "content"
+    t.string "commentable_type", null: false
+    t.integer "commentable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "foods", force: :cascade do |t|
@@ -34,11 +45,31 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_24_180113) do
     t.string "image"
   end
 
+  create_table "relationships", force: :cascade do |t|
+    t.integer "follower_id"
+    t.integer "followed_id"
+    t.integer "interest"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "songs", force: :cascade do |t|
     t.string "name"
     t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "timelines", force: :cascade do |t|
+    t.text "attributeValue"
+    t.integer "attributeType"
+    t.integer "user_id", null: false
+    t.string "timelineType_type", null: false
+    t.integer "timelineType_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["timelineType_type", "timelineType_id"], name: "index_timelines_on_timelineType"
+    t.index ["user_id"], name: "index_timelines_on_user_id"
   end
 
   create_table "user_books", force: :cascade do |t|
@@ -94,8 +125,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_24_180113) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "password_digest"
+    t.string "remember_digest"
   end
 
+  add_foreign_key "comments", "users"
+  add_foreign_key "timelines", "users"
   add_foreign_key "user_books", "books"
   add_foreign_key "user_books", "users"
   add_foreign_key "user_foods", "foods"

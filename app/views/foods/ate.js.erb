@@ -1,0 +1,3 @@
+$(".foods_ate").html("<%= escape_javascript(render 'ate' ) %>");
+$(".foods_to_eat").html("<%= escape_javascript(render 'to_eat') %>");
+$(".food_actions_<%= @food.id %>").html("<%= escape_javascript(render 'actions', food: @food) %>")
