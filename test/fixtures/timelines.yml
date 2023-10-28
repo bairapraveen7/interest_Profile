@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sectorId: 1
+  attributeType: 1
+  user: one
+  timelineType: one
+  timelineType_type: Timelinetype
+
+two:
+  sectorId: 1
+  attributeType: 1
+  user: two
+  timelineType: two
+  timelineType_type: Timelinetype

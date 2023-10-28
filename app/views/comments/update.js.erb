@@ -1,0 +1,1 @@
+$("#comment_section_<%= @comment.id %>").html("<%= escape_javascript(render 'shared/each_comment', user: @user, movie: @movie, comment: @comment,rating: @user.movie_rating(@movie) ) %>")

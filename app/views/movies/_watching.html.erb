@@ -2,7 +2,7 @@
   <% @watching_movies.each do |movie| %>
     <div class="col-lg col-sm-8 col-md-3 m-auto">
       <div class="card border-0 shadow">
-        <%= link_to movie_path(movie) do %>
+        <%= link_to movie_path(movie, user: @user) do %>
         <%= image_tag(movie.image || "movie_logo.jpg" , alt: 'Food Logo' , class: "card-img-top") %>
         <% end %>
           <div class="card-body">
@@ -14,7 +14,7 @@
             </h7>
            
 
-
+       <% if current_user?(@user) %>
 
           <div class="row"> 
 
@@ -56,6 +56,8 @@
               </div>
 
             </div>
+
+        <% end %>
 
               
 

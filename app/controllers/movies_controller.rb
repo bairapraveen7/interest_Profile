@@ -1,5 +1,7 @@
 class MoviesController < ApplicationController
 
+  include UsersHelper
+
   skip_before_action :verify_authenticity_token
 
   def new
@@ -14,7 +16,7 @@ class MoviesController < ApplicationController
     end 
    initialize_user_movies
     if params[:user_id]
-      render 'movies/user', id: 2
+      render 'movies/user'  
     end 
 
 
@@ -39,7 +41,7 @@ class MoviesController < ApplicationController
   def destroy
     current_user.connect_movies.find_by(movie_id: params[:id]).destroy
     @movie = Movie.find(params[:id])
-    initialize_user_movies
+    initialize_user_movies()
     respond_to do |format|
       format.html { redirect_to user_movies_path(current_user) }
       format.js   {
@@ -52,6 +54,7 @@ class MoviesController < ApplicationController
     current_user.connect_movies.get_or_create(id: params[:id]).mark_as_watched! 
     initialize_user_movies
     @movie = Movie.find(params[:id])
+    current_user.timelines.movie_status(timelineType: @movie,attributeValue: "watched")
     flash.now[:success] = "Movie added to watched list successfully"
     respond_to do |format|
       format.html { redirect_to user_movies_path(current_user) }
@@ -66,6 +69,7 @@ class MoviesController < ApplicationController
     current_user.connect_movies.get_or_create(id: params[:id]).mark_as_watching!
     initialize_user_movies
     @movie = Movie.find(params[:id])
+    current_user.timelines.movie_status(timelineType: @movie,attributeValue: "watching")
     flash.now[:success] = "Movie added to watching list successfully"
     respond_to do |format|
       format.html { redirect_to user_movies_path(current_user) }
@@ -80,6 +84,7 @@ class MoviesController < ApplicationController
     current_user.connect_movies.get_or_create(id: params[:id]).mark_as_to_watch!
     initialize_user_movies
     @movie = Movie.find(params[:id])
+    current_user.timelines.movie_status(timelineType: @movie,attributeValue: "to_watch")
     flash[:success] = "Movie added to to_watch list successfully"
     respond_to do |format|
       format.html { redirect_to user_movies_path(current_user) }
@@ -95,13 +100,17 @@ class MoviesController < ApplicationController
     respond_to do |format|
       format.html {
         current_user.connect_movies.find_by(movie_id: movie_update_params[:id]).update(rating: movie_update_params[:rating],notes: movie_update_params[:notes])
-        redirect_to movie_path(@movie, watched: true)
+        redirect_to movie_path(@movie, watched: true,user: current_user)
       }
       format.js 
     end
   end 
 
   private 
+
+  def actual_user
+    params[:user_id] ? User.find(params[:user_id]) : current_user
+  end 
 
   def movie_create_params
     params.require(:movie).permit(:name,:director,:image)
@@ -112,10 +121,10 @@ class MoviesController < ApplicationController
   end 
 
   def initialize_user_movies
-    @user = current_user
-    @watched_movies = current_user&.connect_movies.watched_movies
-    @watching_movies = current_user&.connect_movies.watching_movies
-    @to_watch_movies = current_user&.connect_movies.to_watch_movies
+    @user = actual_user
+    @watched_movies = @user&.connect_movies.watched_movies
+    @watching_movies = @user&.connect_movies.watching_movies
+    @to_watch_movies = @user&.connect_movies.to_watch_movies
   end 
 
 end
