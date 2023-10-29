@@ -14,9 +14,15 @@ class UsersController < ApplicationController
     end
   end 
 
+  def feed
+    @feed = current_user.feed
+  end 
+
   def show
     @user = User.find(params[:id])
   end
+
+
 
   private
 

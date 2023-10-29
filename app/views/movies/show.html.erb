@@ -11,41 +11,35 @@
                 <%= @movie.director %>
             </h3>
 
-            <% user = User.find(params[:user]) %>
 
-            <% if params[:watched] %>
-
- 
-            <div class="card border-0 shadow" style="width: 100%; background-color: lavender;">
+                <% if params[:watched] %>
 
 
-                <div class="card-body">
+                    <div class="card border-0 shadow" style="width: 100%; background-color: lavender;">
 
-                <div class="movie_rating_notes">
 
-                    
+                        <div class="card-body">
 
-                <h3>Rating: <%= user.movie_rating(@movie) %></h3>
+                            <div class="movie_rating">
 
-                <h3>Review: <%= user.movie_notes(@movie) %></h3>
+                            <%= render 'rating' %>
 
-                <% if current_user?(user) %>
+                                
 
-                <%= form_with(url: user_movie_path(user,@movie), method: "patch",local: false) do %>
-                                                            <%= submit_tag "Modify" ,
-                                                                class: "btn btn-primary" %>
-                                                                <% end %>
+                            </div>
 
-                <% end %>
+                            <div class="movie_review">
 
-                </div>
+                                <%= render 'review' %> 
 
-                </div>
-            </div>
+                            </div>
 
-                
+                        </div>
+                    </div>
 
-                <% end %>
+
+
+                    <% end %>
 
         </div>
         <div class="col-12">
@@ -58,17 +52,17 @@
                 software like Aldus PageMaker including versions of Lorem Ipsum.</p>
         </div>
 
-        <% if current_user?(user) %>
-        <div class="col-12">
-            <%= render 'shared/new_comment', movie: @movie %>
-        </div>
-        <% end %>
+        <% if current_user?(@user) %>
+            <div class="col-12">
+                <%= render 'shared/new_comment' , movie: @movie %>
+            </div>
+            <% end %>
 
-        <div class="col-12 user_movie_comments">
-            <h3>Comments</h3>
-            
-                <%= render 'shared/comments' %>
-           
-        </div>
+                <div class="col-12 user_movie_comments">
+                    <h3>Comments</h3>
+
+                    <%= render 'shared/comments' %>
+
+                </div>
     </div>
 </div>

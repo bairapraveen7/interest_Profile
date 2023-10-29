@@ -63,6 +63,10 @@ class Timeline < ApplicationRecord
     create(timelineType: options[:timelineType],attributeType: CHANGED_FOOD_RATING, attributeValue: options[:attributeValue])
   end 
 
+  def self.my_feed(user)  
+    where("user_id IN (#{user.active_relationships.followed_ids})", user_id: user.id)
+  end 
+
 
 
 end

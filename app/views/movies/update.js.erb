@@ -1,1 +1,19 @@
-$(".movie_rating_notes").html("<%=  escape_javascript(render 'rating_notes') %>")
+ <% if params[:updated] %>
+    
+    <% if params[:rating] %>
+       $(".movie_rating").html("<%= escape_javascript(render 'rating') %>")
+    <% elsif params[:notes] %>
+       $(".movie_review").html("<%= escape_javascript(render 'review') %>")
+    <% end %>
+
+ <% else %>
+ 
+    <% if params[:rating] %>
+      $(".movie_rating").html("<%=  escape_javascript(render 'change_rating') %>")
+    <% elsif params[:review] %>
+      $(".movie_review").html("<%= escape_javascript(render 'change_review') %>")
+    <% end %>
+
+<% end %>
+
+ 

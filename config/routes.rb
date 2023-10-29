@@ -12,7 +12,11 @@ Rails.application.routes.draw do
    
   resources :users ,:movies,:songs
 
-    
+  resources :users do 
+    member do 
+      get :feed
+    end 
+  end 
 
   resources :users do
     resources :movies do

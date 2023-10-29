@@ -5,8 +5,7 @@ class Relationship < ApplicationRecord
     MOVIE = 0
     MUSIC = 1
 
-    def self.followed_ids_for_movie
-        debugger
-        "SELECT followed_id FROM relationships WHERE follower_id = :user_id AND interest = #{MOVIE}"
+    def self.followed_ids
+        "SELECT followed_id FROM relationships WHERE follower_id = :user_id"
     end
 end

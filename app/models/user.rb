@@ -25,6 +25,10 @@ class User < ApplicationRecord
         comments.find_by(commentable: options[:commentable],id: options[:id])
     end 
 
+    def feed 
+        Timeline.my_feed(self)
+    end 
+
     def forget
         update_attribute(:remember_digest,nil)
     end 
