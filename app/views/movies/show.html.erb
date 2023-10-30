@@ -13,20 +13,25 @@
 
             <% if params[:watched] %>
 
- 
-            <div class="card border-0 shadow" style="width: 100%; background-color: lavender;">
+
+                    <div class="card border-0 shadow" style="width: 100%; background-color: lavender;">
 
 
-                <div class="card-body">
+                        <div class="card-body">
 
-                <div class="movie_rating_notes">
+                            <div class="movie_rating">
 
-                    
+                            <%= render 'rating' %>
 
+                                
+
+                            </div>
                 <h3>Rating: <%= @user.movie_rating(@movie) %></h3>
 
+                            <div class="movie_review">
                 <h3>Review: <%= @user.movie_notes(@movie) %></h3>
 
+                                <%= render 'review' %> 
                 <% if current_user?(@user) %>
 
                 <%= form_with(url: user_movie_path(@user,@movie), method: "patch",local: false) do %>
@@ -36,15 +41,19 @@
 
                 <% end %>
 
-                </div>
+                            </div>
 
-                </div>
-            </div>
+                        </div>
+                    </div>
 
-                
 
-                <% end %>
 
+                    <% end %>
+
+        </div>
+        <div class="col-12">
+            <h3>Average ratings</h3>
+            <%= @movie.connect_users.average(:rating).to_f %>
         </div>
         <div class="col-12">
             <h3>Description</h3>
@@ -57,16 +66,16 @@
         </div>
 
         <% if current_user?(@user) %>
-        <div class="col-12">
-            <%= render 'shared/new_comment', movie: @movie %>
-        </div>
-        <% end %>
+            <div class="col-12">
+                <%= render 'shared/new_comment' , movie: @movie %>
+            </div>
+            <% end %>
 
-        <div class="col-12 user_movie_comments">
-            <h3>Comments</h3>
-            
-                <%= render 'shared/comments' %>
-           
-        </div>
+                <div class="col-12 user_movie_comments">
+                    <h3>Comments</h3>
+
+                    <%= render 'shared/comments' %>
+
+                </div>
     </div>
 </div>

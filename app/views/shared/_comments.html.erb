@@ -1,5 +1,5 @@
 <% @movie.comments.each do |comment| %>
 <% user = User.find(comment.user_id) %>
 <% movie = Movie.find(comment.commentable_id) %>
-    <%= render 'shared/each_comment', comment: comment, user: user, movie: movie,rating: user.movie_rating(movie) %>
+    <%= render 'shared/each_comment', comment: comment, user: user, movie: movie %>
  <% end %>

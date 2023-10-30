@@ -1,6 +1,12 @@
-<div class="user_show_profile">
-    <div class="text-center">
-      <h1>Hey <%= @user.name %>, How's it going </h1>
+<div class="container">
+    <div class="row">
+      <div class="col-12">
+        <%= gravatar_for(@user) %>
+        <h1>Hey <%= @user.name %>, How's it going </h1>
+      </div>
+
+      <%= render 'shared/stats' %>
+
     </div>
 </div>
 <div class="container d-flex justify-content-center mt-5 pt-5">
@@ -11,7 +17,14 @@
         <div class="card-body">
             <h5 class="card-title">Movies</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <%= link_to "Explore", user_movies_path(@user), class: "btn btn-primary" %>
+            <div class="row d-flex">
+              <div class="col-6">
+            <%= link_to "Explore", user_movies_path(@user), class: "btn btn-primary " %>
+              </div>
+            <div class="movies_follow col-6">
+               <%= render 'follow_form', other_user: @user,interest: 0 %>
+              </div>
+            </div>
         </div>
       </div>
     </div>

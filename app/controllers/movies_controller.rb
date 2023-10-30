@@ -98,12 +98,28 @@ class MoviesController < ApplicationController
 
   def update
     @movie = Movie.find(movie_update_params[:id])
+    @user = User.find(params[:user_id])
     respond_to do |format|
       format.html {
-        current_user.connect_movies.find_by(movie_id: movie_update_params[:id]).update(rating: movie_update_params[:rating],notes: movie_update_params[:notes])
-        redirect_to movie_path(@movie, watched: true,user: current_user)
       }
-      format.js 
+      format.js  {
+
+        if(params[:updated])
+
+          
+
+          if(params[:rating])
+            current_user.timelines.movie_rating(timelineType: @movie, attributeValue: params[:rating])
+            current_user.connect_movies.find_by(movie_id: movie_update_params[:id]).update(rating: movie_update_params[:rating])
+          elsif(params[:notes])
+            current_user.timelines.movie_review(timelineType: @movie, attributeValue: params[:notes])
+            current_user.connect_movies.find_by(movie_id: movie_update_params[:id]).update(notes: movie_update_params[:notes])
+          end
+
+        end 
+          
+
+      }
     end
   end 
 

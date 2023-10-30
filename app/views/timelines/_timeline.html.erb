@@ -1,0 +1,11 @@
+<% @user = User.find(timeline.user_id) %>
+<% @timelineType = Timeline.map_timelineType(timeline.timelineType_type, timeline.timelineType_id) %>
+<div class="col-12 my-5">
+    <p><%= @user.name %> changed <%= Timeline.map_attributeType(timeline.attributeType) %> to <%= timeline.attributeValue %> </p>
+</div>
+<div class="col-6">
+   <%= image_tag(@timelineType.image || 'movie_logo.jpg' , class: "card-img-top")  %>
+</div>
+<div class="col-6">
+   <%= @timelineType.name %>
+</div>

@@ -12,10 +12,17 @@ Rails.application.routes.draw do
   get '/addSong', to: 'songs#new'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
+  delete '/relationship/:id', to: 'relationships#destroy', as: :relationship
    
   resources :users ,:movies, :books, :foods,:songs
 
-    
+  resources :relationships, only: [:create]
+
+  resources :users do 
+    member do 
+      get :feed,:following,:followers
+    end 
+  end 
 
   resources :users do
     resources :movies do
