@@ -60,3 +60,34 @@ movies = [
 movies.each  { |movie|
     Movie.create(name: movie, director: ('a'..'z').to_a.shuffle[0..5].join(""))
 }
+
+names = [
+  "alice",
+  "bob",
+  "charlie",
+  "david",
+  "eva",
+  "frank",
+  "grace",
+  "helen",
+  "isaac",
+  "julia",
+  "kevin",
+  "linda",
+  "michael",
+  "nora",
+  "oliver",
+  "penny",
+  "quincy",
+  "rachel",
+  "samuel",
+  "tina"
+]
+
+names.each  { |name|
+
+   User.create(name: name, email: name+"@gmail.com", password: "foobar", password_confirmation: "foobar")
+
+}
+
+ 

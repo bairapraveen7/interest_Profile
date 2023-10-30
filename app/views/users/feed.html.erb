@@ -5,20 +5,15 @@
             <%= gravatar_for(current_user) %>
             <%= current_user.name %>
         </div>
-        <div class="col-6">
-            <!-- followers count and link to them -->
-            <%= current_user.followers.count %>
-        </div>
-        <div class="col-6">
-            <!-- following count and link to them -->
-            <%= current_user.following.count %>
-        </div>
+        <%= render 'shared/stats' %>
       </div>
 
       <div class="col-8">
-          <%= @feed.each do |each_item| %>
-             <%= each_item %>
-          <% end %>
+        <div class="container">
+            <div class="row">
+                <%= render @feeds %>
+            </div>
+        </div>
       </div>
    </div>
 </div>

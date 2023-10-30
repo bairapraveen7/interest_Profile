@@ -1,0 +1,3 @@
+$(".movies_follow").html("<%= escape_javascript(render 'users/follow_form', other_user: @other_user,interest: 0) %>")
+$("#followers").html("<%= @other_user.followers.count %>")
+$("#following").html("<%= @other_user.following.count %>")

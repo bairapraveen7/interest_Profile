@@ -14,7 +14,7 @@ class Timeline < ApplicationRecord
   CHANGED_BOOK_RATING = 8 
   CHANGED_FOOD_STATUS = 9
   CHANGED_FOOD_REVIEW = 10
-  CHANGED_FOOD_RATING = 11
+  CHANGED_FOOD_RATING = 11 
 
   def self.movie_status(options)
     create(timelineType: options[:timelineType],attributeType: CHANGED_MOVIE_STATUS, attributeValue: options[:attributeValue])
@@ -65,8 +65,58 @@ class Timeline < ApplicationRecord
   end 
 
   def self.my_feed(user)  
-
     timelines = Timeline.joins("INNER JOIN (#{user.active_relationships.to_sql}) as relationships ON timelines.user_id = relationships.followed_id AND timelines.timelineType_type = relationships.interest")
+  end 
+
+  def self.map_timelineType(timelineType,timelineId)
+    result = case timelineType
+              when "Movie"
+                  Movie.find(timelineId)
+              when "Song"
+                Song.find(timelineId)
+              when "Book"
+                  Book.find(timelineId)
+              when "Food"
+                Food.find(timelineId)
+              end 
+
+    return result
+
+  end 
+
+  def self.map_attributeType(attributeType)
+    
+    result = case attributeType
+
+              when 0
+                "Changed Movie Status"
+              when 1
+                "Changed Movie Review"
+              when 2
+                "Changed Movie Rating"
+              when 3
+                "Changed Song Status"
+              when 4
+                "Changed Song Review"
+              when 5
+                "Changed Song Rating"
+              when 6
+                "Changed Book Status"
+              when 7
+                "Changed Book Review"
+              when 8
+                "Changed Book Rating"
+              when 9
+                "Changed Food Status"
+              when 10
+                "Changed Food Review"
+              when 11
+                "Changed Food Rating"
+              else
+                "Unknown"
+              end
+
+    return result
 
   end 
 

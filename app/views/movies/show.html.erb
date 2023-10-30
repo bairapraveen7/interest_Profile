@@ -43,6 +43,10 @@
 
         </div>
         <div class="col-12">
+            <h3>Average ratings</h3>
+            <%= @movie.connect_users.average(:rating).to_f %>
+        </div>
+        <div class="col-12">
             <h3>Description</h3>
             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
                 industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and

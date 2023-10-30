@@ -16,6 +16,7 @@ class User < ApplicationRecord
     has_many :following, through: :active_relationships, source: :followed
     has_many :followers, through: :passive_relationships, source: :follower
     
+    before_save :downcase_email
     validates :email,presence: true, uniqueness: true, length: {maximum: 255}, format: {with: VALID_EMAIL_REGEX}
     validates :password, presence: true, length: { minimum: 6 }
 
@@ -83,7 +84,13 @@ class User < ApplicationRecord
 
     def movie_rating(m1)
         connect_movies.find_by(movie_id: m1.id).rating
-    end   
+    end  
+    
+    private 
+
+    def downcase_email
+        self.email.downcase
+    end 
 
 
 end

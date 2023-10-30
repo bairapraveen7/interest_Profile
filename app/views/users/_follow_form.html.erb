@@ -1,7 +1,8 @@
-<% unless current_user?(@user) %>
-   <% if current_user.following?(@user) %>
-      <%= render 'unfollow' %>
+ 
+<% unless current_user?(other_user) %>
+   <% if current_user.active_relationships.follow_by_movie?(other_user) %>
+   <%= render 'users/unfollow', other_user_id: other_user.id, interest: interest %>
    <% else %>
-      <%= render 'follow' %>
+   <%= render 'users/follow', other_user_id: other_user.id, interest: interest %>
    <% end %>
 <% end %>

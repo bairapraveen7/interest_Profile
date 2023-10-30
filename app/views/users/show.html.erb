@@ -4,13 +4,9 @@
         <%= gravatar_for(@user) %>
         <h1>Hey <%= @user.name %>, How's it going </h1>
       </div>
-      <div class="col-6">
-        <%= @user.followers.count %>
-      </div>
 
-      <div class="col-6">
-        <%= @user.following.count %>
-      </div>
+      <%= render 'shared/stats' %>
+
     </div>
 </div>
 <div class="container d-flex justify-content-center mt-5 pt-5">
@@ -21,15 +17,13 @@
         <div class="card-body">
             <h5 class="card-title">Movies</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <div class="row d-flex justify-content-center">
-            <%= link_to "Explore", user_movies_path(@user), class: "btn btn-primary col-4" %>
-              <% unless current_user?(@user) %>
-                <% if current_user.active_relationships.follow_by_movie?(@user) %>
-                  <%= render 'unfollow', other_user_id: @user.id, interest: 0 %>
-                <% else %>
-                  <%= render 'follow', other_user_id: @user.id, interest: 0 %>
-                <% end %>
-              <% end %>
+            <div class="row d-flex">
+              <div class="col-6">
+            <%= link_to "Explore", user_movies_path(@user), class: "btn btn-primary " %>
+              </div>
+            <div class="movies_follow col-6">
+               <%= render 'follow_form', other_user: @user,interest: 0 %>
+              </div>
             </div>
         </div>
       </div>
