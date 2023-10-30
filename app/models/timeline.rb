@@ -1,4 +1,5 @@
 class Timeline < ApplicationRecord
+  
   belongs_to :user
   belongs_to :timelineType, polymorphic: true
 
@@ -64,9 +65,10 @@ class Timeline < ApplicationRecord
   end 
 
   def self.my_feed(user)  
-    where("user_id IN (#{user.active_relationships.followed_ids})", user_id: user.id)
-  end 
 
+    timelines = Timeline.joins("INNER JOIN (#{user.active_relationships.to_sql}) as relationships ON timelines.user_id = relationships.followed_id AND timelines.timelineType_type = relationships.interest")
+
+  end 
 
 
 end

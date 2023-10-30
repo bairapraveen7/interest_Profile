@@ -9,8 +9,11 @@ Rails.application.routes.draw do
   get '/addSong', to: 'songs#new'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
+  delete '/relationship/:id', to: 'relationships#destroy', as: :relationship
    
   resources :users ,:movies,:songs
+
+  resources :relationships, only: [:create]
 
   resources :users do 
     member do 

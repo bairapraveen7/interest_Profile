@@ -1,0 +1,5 @@
+<%= form_with(url: relationship_path(followed_id: @user_id), html: { method: :delete,  class: "col-8" }) do %>
+   <%= hidden_field_tag :other_user, other_user_id %>
+   <%= hidden_field_tag :interest, interest %>
+   <%= submit_tag "unfollow", class: "btn btn-warning" %>
+<% end %>

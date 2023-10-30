@@ -26,10 +26,6 @@ class UserMovie < ApplicationRecord
     update(status: TO_WATCH)
   end 
 
-  def self.feed(options)
-    where("user_id IN (#{options[:followed_ids]}) OR user_id = :user_id", user_id: options[:user_id])
-  end 
-
   def self.get_or_create(options)
     relation = find_by(movie_id: options[:id]) 
     relation ||= create(movie_id: options[:id])
@@ -37,6 +33,10 @@ class UserMovie < ApplicationRecord
 
   def self.to_watch_movies
     where(status: TO_WATCH).map &MOVIE
+  end 
+
+  def self.users_with_movies_and_status(options)
+    UserMovie.where("")
   end 
 
   def self.watched_movies
