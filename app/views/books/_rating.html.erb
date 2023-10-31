@@ -1,0 +1,10 @@
+<h3>Rating: <%= @user.book_rating(@book) %>
+</h3>
+
+<% if current_user?(@user) %>
+
+    <%= form_with(url: user_book_path(@user,@book,rating: true), method: "patch" , local: false) do %>
+        <%= submit_tag "Modify rating" , class: "btn btn-primary" %>
+            <% end %>
+
+                <% end %>

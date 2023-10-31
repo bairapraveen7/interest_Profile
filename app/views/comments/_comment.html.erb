@@ -1,3 +1,5 @@
+<% user = User.find(comment.user_id) %>
+<% commentable = comment.map_commentable.find(comment.commentable_id) %>
 <div id="comment_section_<%= comment.id %>" class="row my-5">
     <div class="col-12">
     <%= link_to gravatar_for(user, size:20), user %>
@@ -15,7 +17,7 @@
     </div>
     <% if current_user?(user) %>
     <div class="col-12">
-        <%= link_to "edit", edit_user_movie_comment_path(user,movie,comment), remote: true %>
+        <%= link_to "edit", polymorphic_url([current_user,commentable,comment],:action => :edit), remote: true %>
     </div>
     <% end %>
 </div>

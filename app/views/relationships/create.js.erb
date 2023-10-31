@@ -1,3 +1,12 @@
-$(".movies_follow").html("<%= escape_javascript(render 'users/follow_form', other_user: @other_user,interest: 0) %>")
+<% case params[:interest].to_i %>
+   <% when 0 %>
+    $(".movies_follow").html("<%= escape_javascript(render 'users/follow_form', other_user: @other_user,interest: 0) %>")
+   <% when 1 %>
+    $(".songs_follow").html("<%= escape_javascript(render 'users/follow_form', other_user: @other_user,interest: 1) %>")
+   <% when 2 %>
+    $(".foods_follow").html("<%= escape_javascript(render 'users/follow_form', other_user: @other_user,interest: 2) %>")
+   <% when 3 %>
+    $(".books_follow").html("<%= escape_javascript(render 'users/follow_form', other_user: @other_user,interest: 3) %>")
+<% end %>
 $("#followers").html("<%= @other_user.followers.count %>")
 $("#following").html("<%= @other_user.following.count %>")

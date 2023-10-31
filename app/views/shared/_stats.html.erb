@@ -1,20 +1,21 @@
-<% @user ||= current_user %>
+<% @user ||=current_user %>
 
-<div class="stats">
-    <div class="col-2">
-  <a href="<%= following_user_path(@user) %>">
-    <strong id="following" class="stat">
-      <%= @user.following.count %>
-    </strong> 
-    following
-  </a>
-</div>
-  <div class="col-2">
-  <a href="<%= followers_user_path(@user) %>">
-    <strong id="followers" class="stat">
-      <%= @user.followers.count %>
-    </strong>
-    followers
-    </a>
-</div>
-</div>
+  <div class="stats d-flex w-50">
+
+    <div class="mt-4 ">
+      <a href="<%= followers_user_path(@user) %>">
+        <strong id="followers" class="stat">
+          <%= @user.followers.count %>
+        </strong>
+        followers
+      </a>
+    </div>
+    <div class=" mt-4 mx-3">
+      <a href="<%= following_user_path(@user) %>">
+        <strong id="following" class="stat">
+          <%= @user.following.count %>
+        </strong>
+        following
+      </a>
+    </div>
+  </div>

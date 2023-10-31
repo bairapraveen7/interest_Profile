@@ -4,16 +4,13 @@
         <div class="col-12">
             <%= gravatar_for(current_user) %>
             <%= current_user.name %>
+          <%= render 'shared/stats' %>
         </div>
-        <%= render 'shared/stats' %>
       </div>
 
-      <div class="col-8">
-        <div class="container">
-            <div class="row">
-                <%= render @feeds %>
-            </div>
-        </div>
+      <div class="col-8 row border border-dark rounded justify-content-center" style="overflow-y: scroll;height: 100vh;">
+          <%= render @feeds %>
+          <%= will_paginate @feeds %>
       </div>
    </div>
 </div>

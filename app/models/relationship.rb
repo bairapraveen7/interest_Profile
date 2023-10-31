@@ -20,15 +20,15 @@ class Relationship < ApplicationRecord
     end 
   
     def self.follow_by_music other_user
-        create(followed_id: other_user.id,interest: MUSIC)
+        create(followed_id: other_user.id,interest: SONG)
     end 
 
     def self.follow_by_music? other_user
-        !(find_by(followed_id: other_user.id, interest: MUSIC).nil?)
+        !(find_by(followed_id: other_user.id, interest: SONG).nil?)
     end
 
     def self.follow_by_food other_user
-        create(followed_id: other_user.cid,interest: BOOK)
+        create(followed_id: other_user.id,interest: FOOD)
     end 
 
     def self.follow_by_food? other_user
@@ -36,7 +36,7 @@ class Relationship < ApplicationRecord
     end
 
     def self.follow_by_book other_user
-        create(followed_id: other_user.id,interest: FOOD)
+        create(followed_id: other_user.id,interest: BOOK)
     end 
 
     def self.follow_by_book? other_user
@@ -48,7 +48,7 @@ class Relationship < ApplicationRecord
     end 
 
     def self.unfollow_by_music other_user
-        find_by(followed_id: other_user.id,interest: MUSIC).destroy
+        find_by(followed_id: other_user.id,interest: SONG).destroy
     end 
 
     def self.unfollow_by_food other_user
@@ -57,6 +57,24 @@ class Relationship < ApplicationRecord
 
     def self.unfollow_by_book other_user
         find_by(followed_id: other_user.id,interest: BOOK).destroy
+    end 
+
+    def self.follow_by_interest?(interest,other_user)
+        result = case interest
+            when 0
+               follow_by_movie? other_user
+           
+            when 1
+                follow_by_music? other_user
+         
+            when 2
+                follow_by_food? other_user
+            
+            when 3
+                follow_by_book? other_user
+             
+        end 
+        result
     end 
 
 

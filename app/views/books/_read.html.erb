@@ -13,6 +13,7 @@
                             <%= book.author %>
                         </h7>
            
+                <% if current_user?(@user) %>
                         <div class="row d-flex justify-content-between">
                             <div class="col-6 ">
                                         <div class="dropdown">
@@ -52,6 +53,7 @@
                                           <% end %>
                                         </div>
                         </div>
+                <% end %>
                     
 
                     </div>

@@ -1,0 +1,10 @@
+<h3>Review: <%= @user.song_review(@song) %>
+</h3>
+
+<% if current_user?(@user) %>
+
+    <%= form_with(url: user_song_path(@user,@song,review: true), method: "patch" , local: false) do %>
+        <%= submit_tag "Modify review" , class: "btn btn-primary" %>
+            <% end %>
+
+                <% end %>

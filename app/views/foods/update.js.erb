@@ -1,1 +1,19 @@
-$(".food_rating_review").html("<%=  escape_javascript(render 'rating_notes') %>")
+ <% if params[:updated] %>
+    
+    <% if params[:rating] %>
+       $(".food_rating").html("<%= escape_javascript(render 'rating') %>")
+    <% elsif params[:review] %>
+       $(".food_review").html("<%= escape_javascript(render 'review') %>")
+    <% end %>
+
+ <% else %>
+ 
+    <% if params[:rating] %>
+      $(".food_rating").html("<%=  escape_javascript(render 'change_rating') %>")
+    <% elsif params[:review] %>
+      $(".food_review").html("<%= escape_javascript(render 'change_review') %>")
+    <% end %>
+
+<% end %>
+
+ 

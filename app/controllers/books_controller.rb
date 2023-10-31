@@ -20,6 +20,7 @@ class BooksController < ApplicationController
 
   def show 
     @book = Book.find(params[:id])
+    @user = User.find(params[:user_id])
   end 
 
   def change_rating
@@ -52,6 +53,7 @@ class BooksController < ApplicationController
     initialize_user_books
     @book = Book.find(params[:id])
     flash.now[:success] = "Movie added to read list successfully"
+    current_user.timelines.book_status(timelineType: @book,attributeValue: "read")
     respond_to do |format|
       format.html { redirect_to user_books_path(current_user) }
       format.js   {
@@ -66,6 +68,7 @@ class BooksController < ApplicationController
     initialize_user_books
     @book = Book.find(params[:id])
     flash.now[:success] = "Book added to reading list successfully"
+    current_user.timelines.book_status(timelineType: @book,attributeValue: "reading")
     respond_to do |format|
       format.html { redirect_to user_books_path(current_user) }
       format.js   {
@@ -80,6 +83,7 @@ class BooksController < ApplicationController
     initialize_user_books
     @book = Book.find(params[:id])
     flash[:success] = "Book added to to_read list successfully"
+    current_user.timelines.book_status(timelineType: @book,attributeValue: "to_read")
     respond_to do |format|
       format.html { redirect_to user_movies_path(current_user) }
       format.js   {
@@ -90,31 +94,51 @@ class BooksController < ApplicationController
   end 
 
   def update
-    @book = Book.find(book_update_params[:id])
+    @book = Food.find(book_update_params[:id])
+    @user = User.find(book_update_params[:user_id])
     respond_to do |format|
       format.html {
-        current_user.connect_books.find_by(book_id: book_update_params[:id]).update(rating: book_update_params[:rating],review: book_update_params[:review])
-        redirect_to book_path(@book, read: true)
       }
-      format.js 
+      format.js  {
+
+        if(params[:updated])
+
+          
+
+          if(params[:rating])
+            current_user.timelines.book_rating(timelineType: @book, attributeValue: params[:rating])
+            current_user.connect_books.find_by(book_id: book_update_params[:id]).update(rating: book_update_params[:rating])
+          elsif(params[:review])
+            current_user.timelines.book_review(timelineType: @book, attributeValue: params[:review])
+            current_user.connect_books.find_by(book_id: book_update_params[:id]).update(review: book_update_params[:review])
+          end
+
+        end 
+          
+
+      }
     end
   end 
 
-  private 
+  private
+  
+  def actual_user
+    params[:user_id] ? User.find(params[:user_id]) : current_user
+  end
 
   def book_create_params
     params.require(:book).permit(:name,:author,:image)
   end 
 
   def book_update_params
-    params.permit(:rating,:review,:id)
+    params.permit(:rating,:review,:id,:user_id)
   end 
 
   def initialize_user_books
-    @user = current_user
-    @read_books = current_user&.connect_books.read_books
-    @reading_books = current_user&.connect_books.reading_books
-    @to_read_books = current_user&.connect_books.to_read_books
+    @user = actual_user
+    @read_books = @user&.connect_books.read_books
+    @reading_books = @user&.connect_books.reading_books
+    @to_read_books = @user&.connect_books.to_read_books
   end 
 
 end

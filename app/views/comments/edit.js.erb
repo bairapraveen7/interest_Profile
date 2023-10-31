@@ -1,1 +1,1 @@
-$("#comment_section_<%= @comment.id %>").html("<%= escape_javascript(render 'shared/update_comment', user: @user, movie: @movie, comment: @comment ) %>")
+$("#comment_section_<%= @comment.id %>").html("<%= escape_javascript(render 'comments/edit', user: @user, commentable: @commentable, comment: @comment  ) %>")

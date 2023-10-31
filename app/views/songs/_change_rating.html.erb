@@ -1,0 +1,16 @@
+
+
+
+
+        <%= form_with(url: user_song_path(current_user,@song, updated: true), method: "patch", local: false ) do |f| %>
+            <div class="form-group row">
+                <%= f.label :rating, "Rating" , class: "col-sm-2 col-form-label" %>
+                    <div class="col-sm-10">
+                        <%= f.range_field :rating, value: current_user.connect_songs.find_by(song_id: @song.id).rating, class: "form-control-range" , in: 1..5 %>
+                    </div>
+            </div>
+            <%= f.submit "Update Details" , class: "btn btn-primary" %>
+        <% end %>
+
+    </div>
+</div>

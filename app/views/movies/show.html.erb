@@ -14,41 +14,30 @@
             <% if params[:watched] %>
 
 
-                    <div class="card border-0 shadow" style="width: 100%; background-color: lavender;">
+                <div class="card border-0 shadow" style="width: 100%; background-color: lavender;">
 
 
-                        <div class="card-body">
+                    <div class="card-body">
 
-                            <div class="movie_rating">
+                        <div class="movie_rating">
 
                             <%= render 'rating' %>
 
-                                
+                        </div>
 
-                            </div>
-                <h3>Rating: <%= @user.movie_rating(@movie) %></h3>
+                        <div class="movie_review">
+                             
 
-                            <div class="movie_review">
-                <h3>Review: <%= @user.movie_notes(@movie) %></h3>
+                            <%= render 'review' %>
+                                 
+                        </div>
 
-                                <%= render 'review' %> 
-                <% if current_user?(@user) %>
+                    </div>
+                </div>
 
-                <%= form_with(url: user_movie_path(@user,@movie), method: "patch",local: false) do %>
-                                                            <%= submit_tag "Modify" ,
-                                                                class: "btn btn-primary" %>
-                                                                <% end %>
+
 
                 <% end %>
-
-                            </div>
-
-                        </div>
-                    </div>
-
-
-
-                    <% end %>
 
         </div>
         <div class="col-12">
@@ -67,15 +56,13 @@
 
         <% if current_user?(@user) %>
             <div class="col-12">
-                <%= render 'shared/new_comment' , movie: @movie %>
+                <%= render :template => 'comments/new' , :locals => { commentable: @movie } %>
             </div>
             <% end %>
 
-                <div class="col-12 user_movie_comments">
-                    <h3>Comments</h3>
-
-                    <%= render 'shared/comments' %>
-
+                <div class="col-12 user_movie_<%= @movie.id%>_comments">
+                    
+                        <%= render 'comments/all_comments', commentable: @movie %>
                 </div>
     </div>
 </div>

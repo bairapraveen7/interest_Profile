@@ -9,7 +9,7 @@
    </div>
     <div class="col-12">
         <span class="content">
-            <%= form_with(url:  user_movie_comment_path(user,movie,comment), method: :patch, local: false) do %>
+            <%= form_with(url: polymorphic_url([user,commentable,comment]), method: :patch, local: false) do %>
       
           <%= text_field_tag 'content', nil, value: comment.content , class: "form-control"  %>
           <%= submit_tag "Update", class: "btn btn-primary mt-4" %>

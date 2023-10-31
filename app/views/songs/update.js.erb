@@ -1,1 +1,19 @@
-$(".song_rating_review").html("<%=  escape_javascript(render 'rating_review') %>")
+ <% if params[:updated] %>
+    
+    <% if params[:rating] %>
+       $(".song_rating").html("<%= escape_javascript(render 'rating') %>")
+    <% elsif params[:review] %>
+       $(".song_review").html("<%= escape_javascript(render 'review') %>")
+    <% end %>
+
+ <% else %>
+ 
+    <% if params[:rating] %>
+      $(".song_rating").html("<%=  escape_javascript(render 'change_rating') %>")
+    <% elsif params[:review] %>
+      $(".song_review").html("<%= escape_javascript(render 'change_review') %>")
+    <% end %>
+
+<% end %>
+
+ 

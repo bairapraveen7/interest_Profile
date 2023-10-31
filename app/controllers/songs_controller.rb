@@ -20,6 +20,7 @@ class SongsController < ApplicationController
 
   def show 
     @song = Song.find(params[:id])
+    @user = User.find(params[:user_id])
   end 
 
   def change_rating
@@ -51,6 +52,7 @@ class SongsController < ApplicationController
     initialize_user_songs
     @song = Song.find(params[:id])
     flash.now[:success] = "Song added to liked list successfully"
+    current_user.timelines.song_status(timelineType: @song,attributeValue: "liked")
     respond_to do |format|
       format.html { redirect_to user_movies_path(current_user) }
       format.js   {
@@ -62,28 +64,48 @@ class SongsController < ApplicationController
 
   def update
     @song = Song.find(song_update_params[:id])
+    @user = User.find(song_update_params[:user_id])
     respond_to do |format|
       format.html {
-        current_user.connect_songs.find_by(song_id: song_update_params[:id]).update(rating: song_update_params[:rating],review: song_update_params[:review])
-        redirect_to song_path(@song, liked: true)
       }
-      format.js 
+      format.js  {
+
+        if(params[:updated])
+
+          
+
+          if(params[:rating])
+            current_user.timelines.song_rating(timelineType: @song, attributeValue: params[:rating])
+            current_user.connect_songs.find_by(song_id: song_update_params[:id]).update(rating: song_update_params[:rating])
+          elsif(params[:review])
+            current_user.timelines.song_review(timelineType: @song, attributeValue: params[:review])
+            current_user.connect_songs.find_by(song_id: song_update_params[:id]).update(review: song_update_params[:review])
+          end
+
+        end 
+          
+
+      }
     end
   end 
 
   private 
+
+  def actual_user
+    params[:user_id] ? User.find(params[:user_id]) : current_user
+  end
 
   def song_create_params
     params.require(:song).permit(:name,:image)
   end 
 
   def song_update_params
-    params.permit(:rating,:review,:id)
+    params.permit(:rating,:review,:id,:user_id)
   end 
 
   def initialize_user_songs
-    @user = current_user
-    @liked_songs = current_user&.connect_songs.liked_songs
+    @user = actual_user
+    @liked_songs = @user&.connect_songs.liked_songs
   end 
 
 end

@@ -18,20 +18,18 @@
 
                 <div class="card-body">
 
-                <div class="book_rating_review">
+                    <div class="book_rating">
 
-                    
+                        <%= render 'rating' %>
 
-                <h3>Rating: <%= @user.book_rating(@book) %></h3>
+                    </div>
 
-                <h3>Review: <%= @user.book_review(@book) %></h3>
+                    <div class="book_review">
+                         
 
-                <%= form_with(url: user_book_path(current_user,@book), method: "patch",local: false) do %>
-                                                            <%= submit_tag "Modify" ,
-                                                                class: "btn btn-primary" %>
-                                                                <% end %>
-
-                </div>
+                        <%= render 'review' %>
+                             
+                    </div>
 
                 </div>
             </div>
@@ -50,5 +48,18 @@
                 release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing
                 software like Aldus PageMaker including versions of Lorem Ipsum.</p>
         </div>
+        <% if current_user?(@user) %>
+            <div class="col-12">
+                <%= render :template => 'comments/new' , :locals => { commentable: @book } %>
+            </div>
+            <% end %>
+
+                <div class="col-12 user_book_<%= @book.id%>_comments">
+             
+
+                    <%= render 'comments/all_comments', commentable: @book %>
+
+                </div>
+
     </div>
 </div>

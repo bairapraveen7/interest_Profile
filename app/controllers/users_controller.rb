@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   end 
 
   def feed
-    @feeds = current_user.feed.paginate(page: params[:page])
+    @feeds = current_user.feed.reverse_order.paginate(page: params[:page], per_page: 10)
   end 
 
   def following
@@ -31,8 +31,7 @@ class UsersController < ApplicationController
   end 
 
   def index 
-    @users = User.all
-    render @users
+    @users = User.all.paginate(page: params[:page], per_page: 10)
   end 
 
   def show

@@ -1,8 +1,8 @@
 <div class="container">
     <div class="row">
-      <div class="col-12">
+      <div class="col-12 d-flex">
         <%= gravatar_for(@user) %>
-        <h1>Hey <%= @user.name %>, How's it going </h1>
+        <h1 class="mx-5">Hey <%= @user.name %>, How's it going </h1>
       </div>
 
       <%= render 'shared/stats' %>
@@ -36,20 +36,14 @@
         <div class="card-body">
             <h5 class="card-title">Music</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <%= link_to "Explore", user_songs_path(@user), class: "btn btn-primary" %>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="col-lg col-sm-12 col-md-3 m-auto">
-
-      <div class="card border-0 shadow">
-      <%= image_tag 'book_logo.jpg', alt: 'Food Logo', class: "card-img-top" %>
-        <div class="card-body">
-            <h5 class="card-title">Books</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <%= link_to "Explore", user_books_path(@user), class: "btn btn-primary" %>
+            <div class="row d-flex">
+              <div class="col-6">
+            <%= link_to "Explore", user_songs_path(@user), class: "btn btn-primary " %>
+              </div>
+            <div class="songs_follow col-6">
+               <%= render 'follow_form', other_user: @user,interest: 1 %>
+              </div>
+            </div>
         </div>
       </div>
 
@@ -61,11 +55,42 @@
         <div class="card-body">
             <h5 class="card-title">Foods</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <%= link_to "Explore", user_foods_path(@user), class: "btn btn-primary" %>
+            
+            <div class="row d-flex">
+              <div class="col-6">
+            <%= link_to "Explore", user_foods_path(@user), class: "btn btn-primary " %>
+              </div>
+            <div class="foods_follow col-6">
+               <%= render 'follow_form', other_user: @user,interest: 2 %>
+              </div>
+            </div>
+          </div>
+      </div>
+
+    </div>
+
+
+    <div class="col-lg col-sm-12 col-md-3 m-auto">
+
+      <div class="card border-0 shadow">
+      <%= image_tag 'book_logo.jpg', alt: 'Food Logo', class: "card-img-top" %>
+        <div class="card-body">
+            <h5 class="card-title">Books</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <div class="row d-flex">
+              <div class="col-6">
+            <%= link_to "Explore", user_books_path(@user), class: "btn btn-primary " %>
+              </div>
+            <div class="books_follow col-6">
+               <%= render 'follow_form', other_user: @user,interest: 3 %>
+              </div>
+            </div>
         </div>
       </div>
 
     </div>
+
+    
 
 
   </div>
